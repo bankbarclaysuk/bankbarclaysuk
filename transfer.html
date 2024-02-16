@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Include your head section here with all the necessary stylesheets and scripts -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+    <style>
+        /* Include your styles here */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header, nav {
+            background-color: #0073e6;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        .container {
+            margin: 18px;
+        }
+
+        h2 {
+            color: #0073e6;
+        }
+
+        #transferTable,
+        #sentTable,
+        #receivedTable,
+        #transactionTable {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            overflow-x: auto; /* Enable horizontal scrolling on small screens */
+        }
+
+        #transferTable th,
+        #transferTable td,
+        #sentTable th,
+        #sentTable td,
+        #receivedTable th,
+        #receivedTable td,
+        #transactionTable th,
+        #transactionTable td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        #transferTable th,
+        #sentTable th,
+        #receivedTable th,
+        #transactionTable th {
+            background-color: #0073e6;
+            color: #fff;
+        }
+
+        #transferTable tr:nth-child(even),
+        #sentTable tr:nth-child(even),
+        #receivedTable tr:nth-child(even),
+        #transactionTable tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        form {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input,
+        button {
+            padding: 6px;
+            margin: 5px;
+        }
+
+        button {
+            background-color: #0073e6;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 767px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">
+                <img src="./images/barclays eagle.png" alt="" class="pic">
+                <img src="./images/barclays.png" alt="" class="pic2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" aria-current="page" href="./login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="https://www.barclays.co.uk/help/contact-us/"><i class="bi bi-telephone h5"></i> Contact us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="https://www.barclays.co.uk/branch-finder/"> <i class="bi bi-geo-alt h5"></i> Find Barclays</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="https://www.barclays.co.uk/help/contact-us/"> <i class="bi bi-search h5"></i> Search</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+ <header>
+        <i class="fas fa-university bank-icon"></i> Barclays Bank
+    </header>
+
+    <nav>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="transfer.html"><i class="fas fa-exchange-alt"></i> Transactions </a>
+        <a href="account.html" onclick="toggleTransactions()"><i class="fas fa-list"></i> Transfers</a>
+    </nav><br>
+
+
+        <!-- Display valid transfers table -->
+        <h2>Transactions History</h2>
+        <table id="transferTable">
+            <tr>
+                <th>Date & Time</th>
+                <th>Recipient</th>
+                <th>Amount</th>
+            </tr>
+        </table>
+
+        <!-- Display sent table -->
+        <h2>Sent</h2>
+        <table id="sentTable">
+            <tr>
+                <th>Date & Time</th>
+                <th>Recipient</th>
+                <th>Amount</th>
+            </tr>
+        </table>
+
+        <!-- Display received table -->
+        <h2>Received</h2>
+        <table id="receivedTable">
+            <tr>
+                <th>Date & Time</th>
+                <th>Sender</th>
+                <th>Amount</th>
+            </tr>
+        </table>
+
+        <!-- Display all transactions table -->
+        <h2>All Transactions</h2>
+        <table id="transactionTable">
+            <tr>
+                <th>Date & Time</th>
+                <th>Sender</th>
+                <th>Recipient</th>
+                <th>Amount</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const transferData = [
+            // Previous transfer entry
+            { date: new Date("2024-02-03T12:15:00"),  recipient: "Mark R. Gardner", amount: 8000 },
+
+            // Additional 15 transactions
+            { date: new Date("2024-02-04T14:30:00"),  recipient: "Mark R. Gardner", amount: 44000 },
+            { date: new Date("2024-02-05T16:45:00"),  recipient: "Leon Damon", amount: 79000.31 },
+            { date: new Date("2024-02-06T10:00:00"),  recipient: "Virginia J. Osborne", amount: 23000.23 },
+            { date: new Date("2024-02-07T11:15:00"),  recipient: "Sean Coleman", amount: 89000.21 },
+            { date: new Date("2024-02-08T13:30:00"),  recipient: "Oscar Matias", amount: 23000.81 },
+            { date: new Date("2024-02-09T15:45:00"),  recipient: "Teresa H. Preusser", amount: 38000.43 },
+            { date: new Date("2024-02-10T09:00:00"),  recipient: "John Coleman", amount: 29000 },
+            { date: new Date("2024-02-11T10:15:00"),  recipient: "Andy Ronsman", amount: 44000 },
+            { date: new Date("2024-02-12T12:30:00"),  recipient: "James Smith", amount: 63000.43 },
+            { date: new Date("2024-02-13T14:45:00"),  recipient: "Ola R. Poirier", amount: 71000.44 },
+            { date: new Date("2024-02-14T08:00:00"),  recipient: "Loretta Smith", amount: 59000.02 },
+            { date: new Date("2024-02-15T09:15:00"),  recipient: "Joseph C. Juarez", amount: 53000.89 },
+            { date: new Date("2024-02-16T11:30:00"),  recipient: "Breanna R. Harvin", amount: 49000.91 },
+            { date: new Date("2024-02-17T13:45:00"),  recipient: "Amanda W. Cruz", amount: 24000.02 },
+            { date: new Date("2024-02-18T15:00:00"),  recipient: "Carol Alaniz", amount: 78000 }
+        ];
+
+        const sentData = [];
+        const receivedData = [];
+
+        
+    // Function to populate transfer details in the table
+    function populateTransferDetails() {
+        const transferTable = document.getElementById("transferTable");
+
+        // Clear existing rows
+        while (transferTable.rows.length > 1) {
+            transferTable.deleteRow(1);
+        }
+
+        // Populate with new data
+        transferData.forEach((transfer, index) => {
+            const newRow = transferTable.insertRow(index + 1);
+            const dateTimeCell = newRow.insertCell(0);
+            const recipientCell = newRow.insertCell(1);
+            const amountCell = newRow.insertCell(2);
+
+            const formattedDate = transfer.date.toLocaleDateString();
+            const formattedTime = transfer.date.toLocaleTimeString();
+
+            // Add icons to each cell
+            dateTimeCell.innerHTML = `<i class="far fa-calendar-alt"></i> ${formattedDate} <i class="far fa-clock"></i> ${formattedTime}`;
+            recipientCell.innerHTML = `<i class="far fa-user"></i> ${transfer.recipient}`;
+            amountCell.innerHTML = `<i class="far fa-money-bill-alt"></i> £${transfer.amount.toFixed(2)}`;
+        });
+    }
+        // Function to add new transaction
+        function addTransaction() {
+            const date = new Date(document.getElementById("transactionDate").value);
+            const recipient = document.getElementById("recipient").value;
+            const amount = parseFloat(document.getElementById("transactionAmount").value);
+
+            if (!date || !recipient || isNaN(amount)) {
+                alert("Please fill in all fields with valid values.");
+                return;
+            }
+
+            // Add the transaction to the transfer data
+            const sender = "Jason Smith";
+            transferData.push({ date, sender, recipient, amount });
+
+            // Add to sent or received data based on the role
+            if (recipient.toLowerCase() === "jason smith") {
+                receivedData.push({ date, sender, amount });
+            } else {
+                sentData.push({ date, recipient, amount });
+            }
+
+            // Update the tables with the new data
+            populateTransferDetails();
+            populateSentTable();
+            populateReceivedTable();
+            populateTransactionTable();
+        }
+
+        // Function to populate sent details in the table
+        function populateSentTable() {
+            const sentTable = document.getElementById("sentTable");
+
+            // Clear existing rows
+            while (sentTable.rows.length > 1) {
+                sentTable.deleteRow(1);
+            }
+
+            // Populate with new data
+            sentData.forEach((sent, index) => {
+                const newRow = sentTable.insertRow(index + 1);
+                const dateTimeCell = newRow.insertCell(0);
+                const recipientCell = newRow.insertCell(1);
+                const amountCell = newRow.insertCell(2);
+
+                const formattedDate = sent.date.toLocaleDateString();
+                const formattedTime = sent.date.toLocaleTimeString();
+
+                // Add icons to each cell
+                dateTimeCell.innerHTML = `<i class="far fa-calendar-alt"></i> ${formattedDate} <i class="far fa-clock"></i> ${formattedTime}`;
+                senderCell.innerHTML = `<i class="far fa-user"></i> ${transfer.sender}`;
+                recipientCell.innerHTML = `<i class="far fa-user"></i> ${transfer.recipient}`;
+                amountCell.innerHTML = `<i class="far fa-money-bill-alt"></i> £${transfer.amount.toFixed(2)}`;
+            });
+        }
+
+        // Function to add new transaction
+        function addTransaction() {
+            const date = new Date(document.getElementById("transactionDate").value);
+            const recipient = document.getElementById("recipient").value;
+            const amount = parseFloat(document.getElementById("transactionAmount").value);
+
+            if (!date || !recipient || isNaN(amount)) {
+                alert("Please fill in all fields with valid values.");
+                return;
+            }
+
+            // Add the transaction to the transfer data
+            const sender = "Jason Smith";
+            transferData.push({ date, sender, recipient, amount });
+
+            // Add a pending transaction
+            addPendingTransaction(date, recipient, amount);
+
+            // Update the tables with the new data
+            populateTransferDetails();
+            populateSentTable();
+            populateReceivedTable();
+            populateTransactionTable();
+        }
+
+        // Function to add pending transaction
+        function addPendingTransaction(date, recipient, amount) {
+            pendingData.push({ date, recipient, amount });
+
+            // Update the pending table with the new data
+            populatePendingTransactions();
+        }
+
+        // Function to populate pending transactions
+        function populatePendingTransactions() {
+            const pendingTable = document.getElementById("pendingTable");
+
+            // Clear existing rows
+            while (pendingTable.rows.length > 1) {
+                pendingTable.deleteRow(1);
+            }
+
+            // Populate with new data
+            transferData.forEach((transfer, index) => {
+                const newRow = transferTable.insertRow(index + 1);
+                const dateTimeCell = newRow.insertCell(0);
+                const recipientCell = newRow.insertCell(1);
+                const amountCell = newRow.insertCell(2);
+
+                const formattedDate = transfer.date.toLocaleDateString();
+                const formattedTime = transfer.date.toLocaleTimeString();
+
+                // Add icons to each cell
+                dateTimeCell.innerHTML = `<i class="far fa-calendar-alt"></i> ${formattedDate} <i class="far fa-clock"></i> ${formattedTime}`;
+                recipientCell.innerHTML = `<i class="far fa-user"></i> ${transfer.recipient}`;
+                amountCell.innerHTML = `<i class="far fa-money-bill-alt"></i> £${transfer.amount.toFixed(2)}`;
+            });
+
+            sentData.forEach((sent, index) => {
+                const newRow = transferTable.insertRow(index + 1);
+                const dateTimeCell = newRow.insertCell(0);
+                const recipientCell = newRow.insertCell(1);
+                const amountCell = newRow.insertCell(2);
+
+                const formattedDate = sent.date.toLocaleDateString();
+                const formattedTime = sent.date.toLocaleTimeString();
+
+                // Add icons to each cell
+                dateTimeCell.innerHTML = `<i class="far fa-calendar-alt"></i> ${formattedDate} <i class="far fa-clock"></i> ${formattedTime}`;
+                recipientCell.innerHTML = `<i class="far fa-user"></i> ${sent.recipient}`;
+                amountCell.innerHTML = `<i class="far fa-money-bill-alt"></i> £${sent.amount.toFixed(2)}`;
+            });
+
+            receiveData.forEach((receive, index) => {
+                const newRow = receiveTable.insertRow(index + 1);
+                const dateTimeCell = newRow.insertCell(0);
+                const senderCell = newRow.insertCell(1);
+                const amountCell = newRow.insertCell(2);
+
+                const formattedDate = receive.date.toLocaleDateString();
+                const formattedTime = receive.date.toLocaleTimeString();
+
+                // Add icons to each cell
+                dateTimeCell.innerHTML = `<i class="far fa-calendar-alt"></i> ${formattedDate} <i class="far fa-clock"></i> ${formattedTime}`;
+                senderCell.innerHTML = `<i class="far fa-user"></i> ${receive.sender}`;
+                amountCell.innerHTML = `<i class="far fa-money-bill-alt"></i> £${receive.amount.toFixed(2)}`;
+            });
+
+            transactionData.forEach((transaction, index) => {
+                const newRow = transactionTable.insertRow(index + 1);
+                const dateTimeCell = newRow.insertCell(0);
+                const partyCell = newRow.insertCell(1);
+                const amountCell = newRow.insertCell(2);
+
+                const formattedDate = transaction.date.toLocaleDateString();
+                const formattedTime = transaction.date.toLocaleTimeString();
+
+                // Add icons to each cell
+                dateTimeCell.innerHTML = `<i class="far fa-calendar-alt"></i> ${formattedDate} <i class="far fa-clock"></i> ${formattedTime}`;
+                partyCell.innerHTML = `<i class="far fa-user"></i> ${transaction.party}`;
+                amountCell.innerHTML = `<i class="far fa-money-bill-alt"></i> £${transaction.amount.toFixed(2)}`;
+            });
+        }
+
+        // Function to add new transaction
+        function addTransaction() {
+            const date = new Date(document.getElementById("transactionDate").value);
+            const recipient = document.getElementById("recipient").value;
+            const amount = parseFloat(document.getElementById("transactionAmount").value);
+
+            if (!date || !recipient || isNaN(amount)) {
+                alert("Please fill in all fields with valid values.");
+                return;
+            }
+
+            // Check if it's a sent or received transaction
+            const isSent = confirm("Is this a Sent transaction?");
+
+            if (isSent) {
+                sentData.push({ date, recipient, amount });
+            } else {
+                const sender = prompt("Enter the sender's name:");
+                receiveData.push({ date, sender, amount });
+            }
+
+            // Update the table with the new data
+            populateTransferDetails();
+        }
+        
+        // Call the function to populate transfer details on page load
+        populateTransferDetails();
+    </script>
+
+</body>
+
+</html>

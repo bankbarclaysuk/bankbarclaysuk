@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #0073e6;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .container {
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .main-content {
+            width: 100%;
+        }
+
+        .sidebar {
+            width: 100%;
+            margin-top: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .bank-icon {
+            font-size: 2em;
+            margin-right: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9f9f9;
+        }
+
+        form {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button {
+            background-color: #0073e6;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+              #transactionForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #transactionForm label {
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #pendingTable {
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        #pendingTable th, #pendingTable td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+            background-color: #f9f9f9; /* Lighter gray */
+        }
+
+        #pendingTable th {
+            background-color: #0073e6; /* Official Bank Blue */
+            color: #fff;
+        }
+
+        .account-summary,
+        .upload-checks,
+        .settings-page {
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        /* Update your existing CSS with the changes below */
+
+.sidebar .account-summary {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar .account-summary h2,
+.sidebar .account-summary p {
+    margin-bottom: 15px;
+}
+
+/* Credit Card Section Styling */
+.credit-card {
+    margin-top: 20px; /* Add margin to separate from account summary */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.credit-card:hover {
+    transform: scale(1.05);
+}
+
+.credit-card img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.credit-card-labels {
+    padding: 15px;
+}
+
+.credit-card-labels p {
+    margin: 8px 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.credit-card-labels strong {
+    color: #333;
+}
+
+/* Animation for subtle card lift effect */
+@keyframes cardLift {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.sidebar .account-summary .credit-card:hover {
+    animation: cardLift 0.5s ease-in-out;
+}
+
+        .account-summary h2,
+        .upload-checks h2,
+        .settings-page h2 {
+            margin-bottom: 15px;
+        }
+
+        .account-summary p,
+        .upload-checks p,
+        .settings-page p {
+            margin: 10px 0;
+        }
+
+        .navbar-toggler {
+            border: none;
+            color: #fff;
+        }
+      
+        .navbar-toggler-icon {
+            background-color: #fff;
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-nav {
+            padding-top: 10px;
+        }
+
+        /* Define a base font size for the icons */
+.nav a i {
+    font-size: 1.2em; /* Adjust as needed */
+}
+
+/* Media query for screens smaller than 768px (typical tablets and mobile phones) */
+@media screen and (max-width: 768px) {
+    .nav a i {
+        font-size: 1.5em; /* Adjust the size for smaller screens */
+    }
+}
+
+        .navbar-nav a {
+            display: block;
+            padding: 10px;
+            color: #0073e6;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        .navbar-nav a:hover {
+            background-color: #f9f9f9;
+        }
+
+        @media screen and (min-width: 768px) {
+            .container {
+                display: flex;
+            }
+
+            .main-content {
+                width: 65%;
+            }
+
+            .sidebar {
+                width: 30%;
+                margin-top: 0;
+                margin-left: 20px;
+            }
+
+            .account-summary,
+            .upload-checks,
+            .settings-page {
+                width: calc(30% - 20px);
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">
+                <img src="./images/barclays eagle.png" alt="" class="pic">
+                <img src="./images/barclays.png" alt="" class="pic2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" aria-current="page" href="./login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="https://www.barclays.co.uk/help/contact-us/"><i class="bi bi-telephone h5"></i> Contact us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="https://www.barclays.co.uk/branch-finder/"> <i class="bi bi-geo-alt h5"></i> Find Barclays</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="https://www.barclays.co.uk/help/contact-us/"> <i class="bi bi-search h5"></i> Search</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <i class="fas fa-university bank-icon"></i> Barclays Bank
+    </header>
+
+    <nav>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="transfer.html"><i class="fas fa-exchange-alt"></i> Transactions</a>
+        <a href="#" onclick="toggleTransactions()"><i class="fas fa-list"></i> Transfers</a>
+        <a href="#settings"><i class="fas fa-cog"></i> Settings</a>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <table id="transactionTable">
+                <tr>
+                    <th>Account Holder</th>
+                    <td>JASON SMITH</td>
+                </tr>
+                <tr>
+                    <th>Current Balance</th>
+                    <td id="accountBalance">£1,867,100.34</td>
+                </tr>
+                <tr>
+                    <th>Barclays Blue Reward</th>
+                    <td id="blueReward">£17,690.90</td>
+                </tr>
+                <tr>
+                    <th>Savings</th>
+                    <td id="savings">£1,867,100.34</td>
+                </tr>
+            </table><br>
+
+           <form id="addTransaction" style="max-width: 400px; margin: 0 auto;">
+    <h2 style="text-align: center; color: #0073e6;">Add Transfers</h2><br>
+    <div style="margin-bottom: 15px;">
+        <label for="bankName" style="display: block; margin-bottom: 5px; color: #333;">Bank Name:</label>
+        <input type="text" id="bankName" name="BankName" required style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="accountNumber" style="display: block; margin-bottom: 5px; color: #333;">Account Number:</label>
+        <input type="number" id="accountNumber" name="Accountnumber" required style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="recieverName" style="display: block; margin-bottom: 5px; color: #333;">Reciever Name</label>
+        <input type="text" id="recieverName" name="recieverName" step="0.01" required style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="routingNumber" style="display: block; margin-bottom: 5px; color: #333;">Routing Number/ SortCode:</label>
+        <input type="number" id="routingNumber" name="routingnumber" required style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="transactionAmount" style="display: block; margin-bottom: 5px; color: #333;">Amount:</label>
+        <input type="number" id="transactionAmount" name="transactionAmount" step="0.01" required style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+    <button type="button" onclick="addTransaction()" style="background-color: #0073e6; color: #fff; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+</form>
+
+
+            <div class="upload-checks">
+               <i class="fas fa-money-check-alt"><h2>Deposit Checks</h2></i>
+ 
+                <p>Upload your checks for deposit below:</p>
+                <!-- Add your check upload functionality here -->
+                <input type="file" accept="image/*" id="checkUpload" name="checkUpload">
+                <button type="button" onclick="uploadCheck()">Upload</button>
+            </div>
+        </div><br>
+
+      <div class="sidebar">
+    <div class="account-summary">
+        <!-- ... (your existing account summary content) ... -->
+
+        <!-- Credit Card Section -->
+        <h2>Credit Card</h2>
+        <div class="credit-card">
+            <img src="./images/barclays.jpg" alt="Credit Card">
+            <div class="credit-card-labels">
+                <p><strong>Card Number:</strong> **** **** **** 3114</p>
+                <p><strong>Cardholder Name:</strong> JASON SMITH</p>
+                <p><strong>Expiry Date:</strong> 12/25</p>
+                <p><strong>CVV:</strong> **3</p>
+            </div>
+        </div>
+        <div id="settings" class="settings-page">
+        <i class="fas fa-cog"><h2>Details</h2></i> 
+        <p><strong>Bank Name:</strong> Barclays Bank</p>
+        <p><strong>Address:</strong> 123 Main Street, Cityville</p>
+        <p><strong>Email:</strong> info@barclays.com</p>
+    </div>
+    </div>
+
+</div>
+
+    
+    <h2>Pending Transactions</h2>
+    <table id="pendingTable">
+        <tr>
+            <th>BankName</th>
+            <th>RecieverName</th>
+            <th>AccountNumber</th>
+            <th>RoutingNumber/Sortcode</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+    </table>
+    <script>
+    function addTransaction() {
+        const bankName = document.getElementById("bankName").value;
+        const recieverName = document.getElementById("recieverName").value;
+        const routingNumber = document.getElementById("routingNumber").value;
+        const accountNumber = document.getElementById("accountNumber").value;
+        const amount = parseFloat(document.getElementById("transactionAmount").value);
+
+        if (!bankName || !routingNumber || !accountNumber || isNaN(amount)) {
+            alert("Please fill in all fields with valid values.");
+            return;
+        }
+
+        const pendingTable = document.getElementById("pendingTable");
+
+        // Add a new row
+        const newRow = pendingTable.insertRow(-1);
+        const bankNameCell = newRow.insertCell(0);
+        const recieverNameCell = newRow.insertCell(1);
+       const routingNumberCell = newRow.insertCell(2);
+        const accountNumberCell = newRow.insertCell(3);
+        const amountCell = newRow.insertCell(4);
+        const statusCell = newRow.insertCell(5);
+
+        bankNameCell.innerHTML = bankName;
+        recieverNameCell.innerHTML =  recieverName;
+        routingNumberCell.innerHTML = routingNumber;
+        accountNumberCell.innerHTML = accountNumber;
+        amountCell.innerHTML = amount >= 0 ? `£${amount.toFixed(2)}` : `-£${Math.abs(amount).toFixed(2)}`;
+        statusCell.innerHTML = "Pending...";
+
+        updateBalance(amount);
+
+        // Reset the form fields
+        document.getElementById("bankName").value = "";
+        document.getElementById("recieverName").value = "";
+        document.getElementById("routingNumber").value = "";
+        document.getElementById("accountNumber").value = "";
+        document.getElementById("transactionAmount").value = "";
+
+        // Show a message
+        alert("Transaction has been sent!");
+    }
+
+    function updateBalance(amount) {
+        const balanceElement = document.getElementById("accountBalance");
+        const currentBalance = parseFloat(balanceElement.innerText.replace(/[^0-9.-]+/g, ""));
+        const newBalance = currentBalance - amount;
+        balanceElement.innerHTML = `£${newBalance.toFixed(2)}`;
+    }
+</script>
+
+
+
+
+</body>
+
+</html>
